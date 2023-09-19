@@ -288,8 +288,7 @@ def main():
 if __name__ == \"__main__\":
     main()"
     
-recibirIps="# Código de recibirIps.py
-import xmlrpc.client
+recibirIps="import xmlrpc.client
 
 def main():
     server_ip = \"172.17.0.2\"  # IP del servidor RPC
@@ -308,7 +307,7 @@ def main():
             # Guardar la lista de IPs en un archivo de texto
             with open(\"ips.txt\", \"w\") as ips_file:
                 for ip in ips_list:
-                    ips_file.write(ip + \"\\n\")
+                    ips_file.write(ip + \"/n\")
                 print(\"Lista de IPs guardada en 'ips.txt'\")
         else:
             print(\"No se encontraron clientes registrados.\")
