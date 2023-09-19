@@ -327,6 +327,7 @@ for ((i=1; i<=$num_contenedores; i++)); do
     
     if [ "$i" -eq 1 ]; then
         echo -e "$server" | docker exec -i "M0xX$i" bash -c "cat > /opt/rcp/server.py"
-        cd /opt/rcp && rm cliente.py ordenar.py recibirIps.py
+        comandoM0xX1="cd /opt/rcp && rm cliente.py ordenar.py recibirIps.py"
+      docker exec -it "M0xX$i" bash -c "$comandoM0xX1"
     fi
 done
