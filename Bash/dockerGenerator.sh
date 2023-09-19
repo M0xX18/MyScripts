@@ -6,8 +6,7 @@ imagen="ubuntu"
 
 comando="mkdir /opt/rcp && cd /opt/rcp && apt update && apt upgrade -y && apt install neovim nano python3 -y && touch cliente.py ordenar.py recibirIps.py"
 
-server="
-import xmlrpc.server
+server="import xmlrpc.server
 import threading
 import time
 import random
@@ -82,8 +81,7 @@ if __name__ == \"__main__\":
     main()
 "
 
-cliente="# Código de cliente.py
-import xmlrpc.client
+cliente="import xmlrpc.client
 import socket
 
 def main_cliente():
@@ -99,7 +97,7 @@ def main_cliente():
     # Registrar al cliente en el servidor y obtener su ID 
     client_id = proxy.register_client(client_ip)
 
-    print(\"\\n---------------------------------------------\")
+    print(\"\n---------------------------------------------\")
     
     print(f\"Conectado al servidor RPC en {server_url}\")
     print(f\"IP del cliente: {client_ip}\")
@@ -148,23 +146,22 @@ def main_cliente():
 
         # Guardar las listas en un archivo de texto
         with open('datos_cliente.txt', 'w') as archivo_txt:
-            archivo_txt.write(\"Grupo de números:\\n\")
-            archivo_txt.write(str(grupo_numeros) + '\\n')
+            archivo_txt.write(\"Grupo de números:\\\n\")
+            archivo_txt.write(str(grupo_numeros) + '\\\n')
 
-            archivo_txt.write(\"Números repetidos:\\n\")
-            archivo_txt.write(str(repetidos) + '\\n')
+            archivo_txt.write(\"Números repetidos:\\\n\")
+            archivo_txt.write(str(repetidos) + '\\\n')
 
-            archivo_txt.write(\"Grupo de números después de eliminar los repetidos (ordenados):\\n\")
-            archivo_txt.write(str(grupo_numeros_sin_repetir) + '\\n')
+            archivo_txt.write(\"Grupo de números después de eliminar los repetidos (ordenados):\\\n\")
+            archivo_txt.write(str(grupo_numeros_sin_repetir) + '\\\n')
 
-            archivo_txt.write(\"Números faltantes:\\n\")
-            archivo_txt.write(str(numeros_faltantes) + '\\n')
+            archivo_txt.write(\"Números faltantes:\\\n\")
+            archivo_txt.write(str(numeros_faltantes) + '\\\n')
 
 if __name__ == \"__main__\":
     main_cliente()"
     
-ordenar="# Código de ordenar.py
-import xmlrpc.client
+ordenar="import xmlrpc.client
 import socket
 import json
 
@@ -330,5 +327,6 @@ for ((i=1; i<=$num_contenedores; i++)); do
     
     if [ "$i" -eq 1 ]; then
         echo -e "$server" | docker exec -i "M0xX$i" bash -c "cat > /opt/rcp/server.py"
+        rm /opt/rpc/cliente.py /opt/rpc/ordenar.py /opt/rpc/recibirIps.py
     fi
 done
