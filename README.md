@@ -1,2 +1,2 @@
 # MyScripts
-Scripts de Bash y Python de elaboracion propia
+Scripts y codigo general de elaboracion propia en lenguajes como Python, Bash, C, GoLang etc...

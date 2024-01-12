@@ -1,6 +1,0 @@
-Bloque #1
-Datos: "1"
-Hash Anterior: "0"
-Nonce: 45322
-Hash Actual: "0000f7d867196c031c962404448d4003b94c82ef7e00d895b3e13df85c18a1a0"
-
