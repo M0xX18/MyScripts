@@ -1,0 +1,93 @@
+version: "3"
+
+services:
+  nodo0:
+    build: ./nodos/nodo0
+    ports:
+      - "5000:5000"
+    depends_on:
+      - nodo1
+      - nodo2
+    command: ["python", "nodo0.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.10
+
+  nodo1:
+    build: ./nodos/nodo1
+    ports:
+      - "5001:5001"
+    depends_on:
+      - nodo3
+      - nodo4
+    command: ["python", "nodo1.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.11
+
+  nodo2:
+    build: ./nodos/nodo2
+    ports:
+      - "5002:5002"
+    depends_on:
+      - nodo5
+      - nodo6
+    command: ["python", "nodo2.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.12
+
+  nodo3:
+    build: ./nodos/nodo3
+    ports:
+      - "5003:5003"
+    command: ["python", "nodo3.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.13
+
+  nodo4:
+    build: ./nodos/nodo4
+    ports:
+      - "5004:5004"
+    depends_on:
+      - nodo7
+    command: ["python", "nodo4.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.14
+
+  nodo5:
+    build: ./nodos/nodo5
+    ports:
+      - "5005:5005"
+    command: ["python", "nodo5.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.15
+
+  nodo6:
+    build: ./nodos/nodo6
+    ports:
+      - "5006:5006"
+    command: ["python", "nodo6.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.16
+
+  nodo7:
+    build: ./nodos/nodo7
+    ports:
+      - "5007:5007"
+    command: ["python", "nodo7.py"]
+    networks:
+      mynetwork:
+        ipv4_address: 192.168.1.17
+
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24
