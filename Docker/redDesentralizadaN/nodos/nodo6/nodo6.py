@@ -13,11 +13,11 @@ frase7 = "frase7 en espera..."
 frase8 = "alli donde tu suave ala se posa"
 id_frase8 = "6"
 
-@app.route('/nodoFin', methods=['GET'])
+@app.route('/nodo6', methods=['GET'])
 def nodo6Fin():
     global frase1, frase2, frase3, frase4, frase5, frase6, frase7, frase8, id_frase4
 
-    response_nodo2 = requests.get('http://192.168.0.12:5002/nodo2hacianodo6')
+    response_nodo2 = requests.get('http://192.168.1.12:5002/nodo2hacianodo6')
 
     if response_nodo2.status_code == 200:
         data_nodo2 = response_nodo2.json()
@@ -29,6 +29,20 @@ def nodo6Fin():
     else:
         return jsonify({'error': 'No se pudo obtener la frase del nodo 2'}), 500
     
+    return jsonify({
+        'frase1': frase1,
+        'frase2': frase2,
+        'frase3': frase3,
+        'frase4': frase4,
+        'frase5': frase5,
+        'frase6': frase6,
+        'frase7': frase7,
+        'frase8': frase8,
+        'id': id_frase8
+    })
+
+@app.route('/nodo6hacianodo2', methods=['GET'])
+def ofrecer_frases_nodo6_a_nodo2():
     return jsonify({
         'frase1': frase1,
         'frase2': frase2,
