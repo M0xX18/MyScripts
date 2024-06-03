@@ -50,7 +50,7 @@ def ofrecer_frase_nodo2_a_nodo6():
         'frase6': frase6,
         'frase7': frase7,
         'frase8': frase8,
-        'id': id_frase4
+        'id': id_frase1
     })
 
 @app.route('/nodo2hacianodo0', methods=['GET'])

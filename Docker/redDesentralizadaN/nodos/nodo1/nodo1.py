@@ -50,7 +50,7 @@ def ofrecer_frase_nodo1_a_nodo0():
         'frase6': frase6,
         'frase7': frase7,
         'frase8': frase8,
-        'id': id_frase7
+        'id': id_frase4
     })
 
 @app.route('/nodo1hacianodo4', methods=['GET'])
@@ -90,7 +90,7 @@ def ofrecer_frase_nodo1_a_nodo4():
         'frase6': frase6,
         'frase7': frase7,
         'frase8': frase8,
-        'id': id_frase7
+        'id': id_frase4
     })
 
 @app.route('/nodo1hacianodo3', methods=['GET'])
@@ -130,7 +130,7 @@ def ofrecer_frase_nodo1_a_nodo3():
         'frase6': frase6,
         'frase7': frase7,
         'frase8': frase8,
-        'id': id_frase3
+        'id': id_frase4
     })
 
 @app.route('/frase_completa', methods=['GET'])
