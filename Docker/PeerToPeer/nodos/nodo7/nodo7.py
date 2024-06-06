@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 nodos_vecinos = {
-    "nodo6": "http://172.18.0.10:5000"
+    "nodo6": "http://172.18.0.16:5006"
 }
 
 numero_nodo7 = 10
@@ -17,21 +17,33 @@ def ofrecer_numeros_nodo7():
         "sumatoria_actual_del_nodo7": sumatoria_actual_del_nodo7
     }), 200
 
-@app.route('/obtener_numeros_nodo6', methods=['GET'])
-def obtener_numeros_nodo6():
+@app.route('/obtener_nodo6/sumar_su_numero', methods=['GET'])
+def sumar_numero_nodo6():
+    try:
+        response = requests.get(nodos_vecinos["nodo6"] + "/ofrecer_numeros_nodo6")
+        if response.status_code == 200:
+            datos_nodo6 = response.json()
+            numero_nodo6 = datos_nodo6.get("numero_nodo6", 0)
+            global sumatoria_actual_del_nodo7
+            sumatoria_actual_del_nodo7 += numero_nodo6
+            return jsonify({
+                "mensaje": "Número del nodo6 sumado exitosamente",
+                "sumatoria_actual_del_nodo7": sumatoria_actual_del_nodo7
+            }), 200
+        else:
+            return jsonify({"error": "No se pudo obtener el número del nodo6"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+@app.route('/obtener_nodo6/sumatoria_actual', methods=['GET'])
+def obtener_sumatoria_nodo6():
     try:
         response = requests.get(nodos_vecinos["nodo6"] + "/ofrecer_numeros_nodo6")
         if response.status_code == 200:
             datos_nodo6 = response.json()
             sumatoria_actual_del_nodo6 = datos_nodo6.get("sumatoria_actual_del_nodo6", 0)
-            
-            global sumatoria_actual_del_nodo7
-            sumatoria_actual_del_nodo7 += sumatoria_actual_del_nodo6
-
             return jsonify({
-                "mensaje": "Sumatoria actualizada con éxito",
-                "sumatoria_actual_del_nodo7": sumatoria_actual_del_nodo7
+                "sumatoria_actual_del_nodo6": sumatoria_actual_del_nodo6
             }), 200
         else:
             return jsonify({"error": "No se pudo obtener la sumatoria del nodo6"}), 500

@@ -18,30 +18,49 @@ def ofrecer_numeros_nodo3():
         "sumatoria_actual_del_nodo3": sumatoria_actual_del_nodo3
     }), 200
 
-@app.route('/obtener_numeros_vecinos', methods=['GET'])
-def obtener_numeros_vecinos():
+@app.route('/obtener_nodo<id>/sumar_su_numero', methods=['GET'])
+def sumar_numero_vecino(id):
+    nodo = f"nodo{id}"
+    if nodo not in nodos_vecinos:
+        return jsonify({"error": "Nodo vecino no válido"}), 400
 
-    sumatoria_total_vecinos = 0
+    try:
+        response = requests.get(nodos_vecinos[nodo] + f"/ofrecer_numeros_{nodo}")
+        if response.status_code == 200:
+            datos_nodo = response.json()
+            numero_nodo = datos_nodo.get(f"numero_{nodo}", 0)
+            global sumatoria_actual_del_nodo3
+            sumatoria_actual_del_nodo3 += numero_nodo
+            return jsonify({
+                "mensaje": f"Número del {nodo} sumado exitosamente",
+                "sumatoria_actual_del_nodo3": sumatoria_actual_del_nodo3
+            }), 200
+        else:
+            return jsonify({"error": f"No se pudo obtener el número del {nodo}"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    for nodo, url in nodos_vecinos.items():
-        try:
-            response = requests.get(url + "/ofrecer_numeros_" + nodo)
-            if response.status_code == 200:
-                datos_nodo_vecino = response.json()
-                sumatoria_actual_del_nodo_vecino = datos_nodo_vecino.get("sumatoria_actual_del_" + nodo, 0)
-                sumatoria_total_vecinos += sumatoria_actual_del_nodo_vecino
-            else:
-                return jsonify({"error": f"No se pudo obtener la sumatoria del {nodo}"}), 500
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+@app.route('/obtener_nodo<id>/sumatoria_actual', methods=['GET'])
+def obtener_sumatoria_vecino(id):
+    nodo = f"nodo{id}"
+    if nodo not in nodos_vecinos:
+        return jsonify({"error": "Nodo vecino no válido"}), 400
 
-    global sumatoria_actual_del_nodo3
-    sumatoria_actual_del_nodo3 += sumatoria_total_vecinos
-
-    return jsonify({
-        "mensaje": "Sumatoria actualizada con éxito",
-        "sumatoria_actual_del_nodo3": sumatoria_actual_del_nodo3
-    }), 200
+    try:
+        response = requests.get(nodos_vecinos[nodo] + f"/ofrecer_numeros_{nodo}")
+        if response.status_code == 200:
+            datos_nodo = response.json()
+            sumatoria_actual_del_nodo = datos_nodo.get(f"sumatoria_actual_del_{nodo}", 0)
+            global sumatoria_actual_del_nodo3
+            sumatoria_actual_del_nodo3 += sumatoria_actual_del_nodo
+            return jsonify({
+                f"sumatoria_actual_del_{nodo}": sumatoria_actual_del_nodo,
+                "sumatoria_actual_del_nodo3": sumatoria_actual_del_nodo3
+            }), 200
+        else:
+            return jsonify({"error": f"No se pudo obtener la sumatoria del {nodo}"}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5003, debug=True)
