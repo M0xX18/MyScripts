@@ -42,8 +42,11 @@ def obtener_sumatoria_nodo6():
         if response.status_code == 200:
             datos_nodo6 = response.json()
             sumatoria_actual_del_nodo6 = datos_nodo6.get("sumatoria_actual_del_nodo6", 0)
+            global sumatoria_actual_del_nodo7
+            sumatoria_actual_del_nodo7 += sumatoria_actual_del_nodo6
             return jsonify({
-                "sumatoria_actual_del_nodo6": sumatoria_actual_del_nodo6
+                "sumatoria_actual_del_nodo6": sumatoria_actual_del_nodo6,
+                "sumatoria_actual_del_nodo7": sumatoria_actual_del_nodo7
             }), 200
         else:
             return jsonify({"error": "No se pudo obtener la sumatoria del nodo6"}), 500

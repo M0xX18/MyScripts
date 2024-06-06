@@ -27,11 +27,11 @@ def sumar_numero_nodo1():
             global sumatoria_actual_del_nodo0
             sumatoria_actual_del_nodo0 += numero_nodo1
             return jsonify({
-                "mensaje": "Número del nodo1 sumado exitosamente",
+                "mensaje": "Numero del nodo1 sumado exitosamente",
                 "sumatoria_actual_del_nodo0": sumatoria_actual_del_nodo0
             }), 200
         else:
-            return jsonify({"error": "No se pudo obtener el número del nodo1"}), 500
+            return jsonify({"error": "No se pudo obtener el numero del nodo1"}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
