@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  xampp:
+    image: dasvi/mariadb-xampp
+    ports:
+      - "80:80"
+      - "3306:3306"
+    volumes:
+      - ./htdocs:/opt/lampp/htdocs
+    networks:
+      - my_network
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword 
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - my_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    ports:
+      - "8080:80"
+    networks:
+      - my_network
+
+volumes:
+  mariadb_data:
+
+networks:
+  my_network:
+    driver: bridge
+

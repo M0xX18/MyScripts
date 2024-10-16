@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 nodos_vecinos = {
-    "nodo1": "http://172.18.0.11:5001"
+    "nodo1": "http://172.18.0.11:5001/"
 }
 
 numero_nodo0 = 10
