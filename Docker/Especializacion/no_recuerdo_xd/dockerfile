@@ -1,0 +1,7 @@
+FROM ubuntu
+
+RUN apt update && apt upgrade -y
+
+EXPOSE 80
+
+CMD ["uname -a"]
